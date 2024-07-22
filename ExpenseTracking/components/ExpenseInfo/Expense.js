@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native';
 import PriceBox from './PriceBox';
 
-export default function ExpenseInfo() {
+export default function Expense() {
     return (
         <View style={styles.rootContainer}>
             <View style={styles.textContainer}>
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         fontFamily: 'fira-sans-bold'
     },
     itemDate:{
-        fontFamily: 'fira-sans'
+        fontFamily: 'fira-sans-light'
     },
     buttonContainer: {
         justifyContent: 'center',
