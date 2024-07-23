@@ -1,4 +1,5 @@
 import { Text, StyleSheet, View } from 'react-native';
+import Colors from '../../constants/colors';
 
 export default function PriceBox({value}) {
   return (
@@ -24,6 +25,7 @@ const styles = StyleSheet.create({
     lineHeight: 21,
     fontWeight: 'bold',
     letterSpacing: 0.25,
-    fontFamily: 'fira-sans-bold'
+    fontFamily: 'fira-sans-bold',
+    color: Colors.black
   },
 });

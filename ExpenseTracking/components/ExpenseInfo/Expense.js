@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet } from 'react-native';
 import PriceBox from './PriceBox';
+import Colors from '../../constants/colors';
 
 export default function Expense() {
     return (
@@ -36,10 +37,12 @@ const styles = StyleSheet.create({
     },
     itemName: {
         fontWeight: 'bold',
-        fontFamily: 'fira-sans-bold'
+        fontFamily: 'fira-sans-bold',
+        color: Colors.black
     },
     itemDate:{
-        fontFamily: 'fira-sans-light'
+        fontFamily: 'fira-sans-light',
+        color: Colors.black
     },
     buttonContainer: {
         justifyContent: 'center',

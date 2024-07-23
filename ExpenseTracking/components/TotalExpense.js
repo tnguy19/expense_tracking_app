@@ -24,9 +24,11 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   label: {
-    fontFamily: 'fira-sans-light'
+    fontFamily: 'fira-sans-light',
+    color: Colors.black
   },
   totalAmount: {
-    fontFamily: 'fira-sans-bold',
+    fontFamily: 'fira-sans',
+    color: Colors.black
   }
 });
