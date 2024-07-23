@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     },
     headerTitle: {
         fontSize: 18,
-        color: 'black', // Adjust the color as needed
+        color: 'black',
+        fontFamily: 'fira-sans'
     },
 });

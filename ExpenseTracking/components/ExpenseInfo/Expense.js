@@ -1,9 +1,18 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import PriceBox from './PriceBox';
 import Colors from '../../constants/colors';
+import { useNavigation } from '@react-navigation/native';
+
 
 export default function Expense() {
+    const navigation = useNavigation();
+
+    function handlePress(){
+        navigation.navigate('Edit Modal') //Add more logic here to pass info
+    }
+
     return (
+        <Pressable onPress={handlePress}>
         <View style={styles.rootContainer}>
             <View style={styles.textContainer}>
                 <Text style={styles.itemName}>
@@ -14,8 +23,8 @@ export default function Expense() {
             <View style={styles.buttonContainer}>
                 <PriceBox value='18' />
             </View>
-
         </View>
+        </Pressable>
     )
 }
 

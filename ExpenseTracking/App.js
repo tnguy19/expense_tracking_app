@@ -11,6 +11,9 @@ import { Ionicons } from '@expo/vector-icons';
 import AddButton from './components/AddButton';
 import CustomHeader from './components/CustomHeader';
 import { getHeaderTitle } from '@react-navigation/elements';
+import { useState } from 'react';
+import EditExpenseModal from './screens/EditExpenseModal';
+
 
 const Tab = createBottomTabNavigator();
 
@@ -22,42 +25,39 @@ export default function App() {
     'fira-sans-light': require('./assets/fonts/FiraSans-Light.ttf')
   });
 
+  const [isEditing, setIsEditing] = useState(false);
+
   return (
     <>
       <NavigationContainer>
         <Tab.Navigator
-          screenOptions={{
-            // headerStyle: {
-            //   backgroundColor: Colors.primary100,
-            //   paddingHorizontal: 10,
-            //   paddingVertical: 10
-            // },
-           header: ({ navigation, route, options }) => {
+         screenOptions={{
+          header: ({ navigation, route, options }) => {
             const title = getHeaderTitle(options, route.name);
-            return <CustomHeader title={title}/>
-           },
-            headerTitleAlign: 'space-between',
-            headerRight: () => <AddButton />,
-            tabBarActiveTintColor: 'black',
-            tabBarStyle: {
-              backgroundColor: Colors.primary100,
-            }
-          }}
+            return <CustomHeader title={title} />
+          },
+          headerTitleAlign: 'space-between',
+          headerRight: () => <AddButton />,
+          tabBarActiveTintColor: 'black',
+          tabBarStyle: {
+            backgroundColor: Colors.primary100,
+          }
+        }}
         >
-          <Tab.Screen 
-            name="Recent Expenses" 
-            component={RecentExpensesScreen}
-            options={{
-              tabBarIcon: ({focused, size}) => <Octicons name="hourglass" size={size} color={focused ? 'black' : '#808080'}/>
-            }}
-          />
-          <Tab.Screen 
-            name="All Expense" 
-            component={AllExpensesScreen}
-            options={{
-              tabBarIcon: ({focused, size}) => <Ionicons name="calendar-outline" size={size} color={focused ? 'black' : '#808080'}/>
-            }}
-          />
+            <Tab.Screen
+              name="Recent Expenses"
+              component={RecentExpensesScreen}
+              options={{
+                tabBarIcon: ({ focused, size }) => <Octicons name="hourglass" size={size} color={focused ? 'black' : '#808080'} />
+              }}
+            />
+            <Tab.Screen
+              name="All Expenses"
+              component={AllExpensesScreen}
+              options={{
+                tabBarIcon: ({ focused, size }) => <Ionicons name="calendar-outline" size={size} color={focused ? 'black' : '#808080'} />
+              }}
+            />
         </Tab.Navigator>
       </NavigationContainer>
     </>
