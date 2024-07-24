@@ -15,12 +15,12 @@ const styles = StyleSheet.create({
     rootContainer: {
         alignItems: 'center',
         justifyContent: 'center',
-        paddingVertical: 12,
         paddingHorizontal: 32,
         borderRadius: 4,
         elevation: 3,
         backgroundColor: 'white',
-        height: 60
+        height: 40,
+        marginHorizontal: 5
     },
     text: {
         fontSize: 16,

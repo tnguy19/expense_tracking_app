@@ -2,7 +2,6 @@ import {View, StyleSheet} from 'react-native';
 import TotalExpense from '../components/TotalExpense';
 import Expense from '../components/ExpenseInfo/Expense';
 import Colors from '../constants/colors';
-import EditExpenseModal from './EditExpenseModal';
 import { useState } from 'react';
 
 export default function RecentExpensesScreen(){
@@ -10,7 +9,6 @@ export default function RecentExpensesScreen(){
 
     return (
         <View style={styles.container}>
-          {/*{isEditing && <EditExpenseModal/>} */}
         <TotalExpense title="Last 7 Days"/>
        <Expense />
       </View>
@@ -22,6 +20,6 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor: Colors.primary400,
       padding: 16,
-      paddingTop: 50
+      paddingTop: 20
     },
   });

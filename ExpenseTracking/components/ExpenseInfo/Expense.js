@@ -2,13 +2,16 @@ import { View, Text, StyleSheet, Pressable } from 'react-native';
 import PriceBox from './PriceBox';
 import Colors from '../../constants/colors';
 import { useNavigation } from '@react-navigation/native';
-
+import EditContext from '../../context/EditContext';
+import { useContext } from 'react';
 
 export default function Expense() {
     const navigation = useNavigation();
-
+    const {setIsEditing} = useContext(EditContext)
+    
     function handlePress(){
-        navigation.navigate('Edit Modal') //Add more logic here to pass info
+        setIsEditing(true);
+        navigation.navigate('Edit Expense') //Add more logic here to pass info
     }
 
     return (

@@ -12,14 +12,17 @@ import CustomHeader from './components/CustomHeader';
 import { getHeaderTitle } from '@react-navigation/elements';
 import EditExpenseModal from './screens/EditExpenseModal';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useState } from 'react';
+import EditContext from './context/EditContext';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
+
 function ExpensesTab() {
   return (
     <Tab.Navigator
       screenOptions={{
-        header: ({route, options }) => {
+        header: ({ route, options }) => {
           const title = getHeaderTitle(options, route.name);
           return <CustomHeader title={title} buttonVisible={true} />
         }
@@ -50,37 +53,37 @@ export default function App() {
     'fira-sans-light': require('./assets/fonts/FiraSans-Light.ttf')
   });
 
+  const [isEditing, setIsEditing] = useState(false);
+
   return (
     <>
-      <NavigationContainer>
-        <Stack.Navigator
-        screenOptions={{
-          
-        }}
-      >
-          <Stack.Screen 
-            name='Expenses Tab' 
-            component={ExpensesTab}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name='Edit Expense'
-            component={EditExpenseModal}
-            options={{
-              presentation: 'modal',
-              header: ({route, options }) => {
-                const title = getHeaderTitle(options, route.name);
-                return (
-                <CustomHeader 
-                  title={title} 
-                  customStyle={{paddingVertical: 10, justifyContent: 'center'}}
-                  buttonVisible={false}
-                />)
-              }
-            }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <EditContext.Provider value={{isEditing, setIsEditing}}>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name='Expenses Tab'
+              component={ExpensesTab}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name='Edit Expense'
+              component={EditExpenseModal}
+              options={{
+                presentation: 'modal',
+                header: ({ route, options }) => {
+                  const title = getHeaderTitle(options, route.name);
+                  return (
+                    <CustomHeader
+                      title={title}
+                      customStyle={{ paddingVertical: 10, justifyContent: 'center' }}
+                      buttonVisible={false}
+                    />)
+                }
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </EditContext.Provider>
     </>
   );
 }
