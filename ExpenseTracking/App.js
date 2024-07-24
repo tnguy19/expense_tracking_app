@@ -8,15 +8,40 @@ import RecentExpensesScreen from './screens/RecentExpensesScreen';
 import Colors from './constants/colors';
 import { Octicons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
-import AddButton from './components/AddButton';
 import CustomHeader from './components/CustomHeader';
 import { getHeaderTitle } from '@react-navigation/elements';
-import { useState } from 'react';
 import EditExpenseModal from './screens/EditExpenseModal';
-
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Tab = createBottomTabNavigator();
-
+const Stack = createNativeStackNavigator();
+function ExpensesTab() {
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        header: ({route, options }) => {
+          const title = getHeaderTitle(options, route.name);
+          return <CustomHeader title={title} buttonVisible={true} />
+        }
+      }}
+    >
+      <Tab.Screen
+        name="Recent Expenses"
+        component={RecentExpensesScreen}
+        options={{
+          tabBarIcon: ({ focused, size }) => <Octicons name="hourglass" size={size} color={focused ? 'black' : '#808080'} />
+        }}
+      />
+      <Tab.Screen
+        name="All Expenses"
+        component={AllExpensesScreen}
+        options={{
+          tabBarIcon: ({ focused, size }) => <Ionicons name="calendar-outline" size={size} color={focused ? 'black' : '#808080'} />
+        }}
+      />
+    </Tab.Navigator>
+  );
+}
 export default function App() {
 
   const [fontsLoaded] = useFonts({
@@ -25,40 +50,36 @@ export default function App() {
     'fira-sans-light': require('./assets/fonts/FiraSans-Light.ttf')
   });
 
-  const [isEditing, setIsEditing] = useState(false);
-
   return (
     <>
       <NavigationContainer>
-        <Tab.Navigator
-         screenOptions={{
-          header: ({ navigation, route, options }) => {
-            const title = getHeaderTitle(options, route.name);
-            return <CustomHeader title={title} />
-          },
-          headerTitleAlign: 'space-between',
-          headerRight: () => <AddButton />,
-          tabBarActiveTintColor: 'black',
-          tabBarStyle: {
-            backgroundColor: Colors.primary100,
-          }
+        <Stack.Navigator
+        screenOptions={{
+          
         }}
-        >
-            <Tab.Screen
-              name="Recent Expenses"
-              component={RecentExpensesScreen}
-              options={{
-                tabBarIcon: ({ focused, size }) => <Octicons name="hourglass" size={size} color={focused ? 'black' : '#808080'} />
-              }}
-            />
-            <Tab.Screen
-              name="All Expenses"
-              component={AllExpensesScreen}
-              options={{
-                tabBarIcon: ({ focused, size }) => <Ionicons name="calendar-outline" size={size} color={focused ? 'black' : '#808080'} />
-              }}
-            />
-        </Tab.Navigator>
+      >
+          <Stack.Screen 
+            name='Expenses Tab' 
+            component={ExpensesTab}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name='Edit Expense'
+            component={EditExpenseModal}
+            options={{
+              presentation: 'modal',
+              header: ({route, options }) => {
+                const title = getHeaderTitle(options, route.name);
+                return (
+                <CustomHeader 
+                  title={title} 
+                  customStyle={{paddingVertical: 10, justifyContent: 'center'}}
+                  buttonVisible={false}
+                />)
+              }
+            }}
+          />
+        </Stack.Navigator>
       </NavigationContainer>
     </>
   );

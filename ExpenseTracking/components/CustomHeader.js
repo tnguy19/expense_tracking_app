@@ -1,13 +1,19 @@
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 import AddButton from './AddButton';
 import Colors from '../constants/colors';
+import { useNavigation } from '@react-navigation/native';
 
-export default function CustomHeader({ title }) {
+export default function CustomHeader({ title, customStyle, buttonVisible }) {
+    const navigation = useNavigation();
+
+    function handleAdd(){
+        navigation.navigate('Edit Expense');
+    }
     return (
         <SafeAreaView style={styles.safeArea}>
-            <View style={styles.headerContainer}>
+            <View style={[styles.headerContainer, customStyle]}>
                 <Text style={styles.headerTitle}>{title}</Text>
-                <AddButton />
+                {buttonVisible && <AddButton onPress={handleAdd} />}
             </View>
         </SafeAreaView>
     );

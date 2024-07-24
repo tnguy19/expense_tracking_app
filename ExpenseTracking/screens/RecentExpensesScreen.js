@@ -2,10 +2,15 @@ import {View, StyleSheet} from 'react-native';
 import TotalExpense from '../components/TotalExpense';
 import Expense from '../components/ExpenseInfo/Expense';
 import Colors from '../constants/colors';
+import EditExpenseModal from './EditExpenseModal';
+import { useState } from 'react';
 
 export default function RecentExpensesScreen(){
+  const [isEditing, setIsEditing] = useState(true);
+
     return (
         <View style={styles.container}>
+          {/*{isEditing && <EditExpenseModal/>} */}
         <TotalExpense title="Last 7 Days"/>
        <Expense />
       </View>
