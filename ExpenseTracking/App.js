@@ -14,6 +14,8 @@ import EditExpenseModal from './screens/EditExpenseModal';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useState } from 'react';
 import EditContext from './context/EditContext';
+import ExpensesContextProvider from './context/ExpenseContext';
+
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -57,33 +59,35 @@ export default function App() {
 
   return (
     <>
-      <EditContext.Provider value={{isEditing, setIsEditing}}>
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen
-              name='Expenses Tab'
-              component={ExpensesTab}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name='Edit Expense'
-              component={EditExpenseModal}
-              options={{
-                presentation: 'modal',
-                header: ({ route, options }) => {
-                  const title = getHeaderTitle(options, route.name);
-                  return (
-                    <CustomHeader
-                      title={title}
-                      customStyle={{ paddingVertical: 10, justifyContent: 'center' }}
-                      buttonVisible={false}
-                    />)
-                }
-              }}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </EditContext.Provider>
+      <ExpensesContextProvider>
+        <EditContext.Provider value={{ isEditing, setIsEditing }}>
+          <NavigationContainer>
+            <Stack.Navigator>
+              <Stack.Screen
+                name='Expenses Tab'
+                component={ExpensesTab}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name='Edit Expense'
+                component={EditExpenseModal}
+                options={{
+                  presentation: 'modal',
+                  header: ({ route, options }) => {
+                    const title = getHeaderTitle(options, route.name);
+                    return (
+                      <CustomHeader
+                        title={title}
+                        customStyle={{ paddingVertical: 10, justifyContent: 'center' }}
+                        buttonVisible={false}
+                      />)
+                  }
+                }}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </EditContext.Provider>
+      </ExpensesContextProvider>
     </>
   );
 }

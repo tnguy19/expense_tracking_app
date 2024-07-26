@@ -4,9 +4,13 @@ import TotalExpense from '../components/TotalExpense';
 import Expense from '../components/ExpenseInfo/Expense';
 import { useNavigation } from '@react-navigation/native';
 import { useLayoutEffect } from 'react';
+import { useContext } from 'react';
+import { ExpenseContext } from '../context/ExpenseContext';
+import ExpensesOutput from '../components/ExpensesOutput';
 export default function AllExpensesScreen(){
     const navigation = useNavigation();
-
+    const expensesContext = useContext(ExpenseContext);
+   console.log(expensesContext)
     useLayoutEffect(() => {
       navigation.setOptions({
         title: 'All Expenses', 
@@ -15,8 +19,9 @@ export default function AllExpensesScreen(){
 
     return (
         <View style={styles.container}>
-        <TotalExpense title='Total' />
-        <Expense />
+        <ExpensesOutput 
+          title='Total'
+          expenses={expensesContext.expenses}/>
       </View>
     )
 }

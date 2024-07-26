@@ -4,14 +4,19 @@ import Colors from '../../constants/colors';
 import { useNavigation } from '@react-navigation/native';
 import EditContext from '../../context/EditContext';
 import { useContext } from 'react';
+import {getFormattedDate} from '../../utils/date';
 
-export default function Expense() {
+export default function Expense({id, name, amount, date}) {
     const navigation = useNavigation();
     const {setIsEditing} = useContext(EditContext)
-    
+    console.log(date);
+    const dateData = new Date(date);
+
     function handlePress(){
         setIsEditing(true);
-        navigation.navigate('Edit Expense') //Add more logic here to pass info
+        navigation.navigate('Edit Expense', {
+            expenseId: id
+        });
     }
 
     return (
@@ -19,12 +24,12 @@ export default function Expense() {
         <View style={styles.rootContainer}>
             <View style={styles.textContainer}>
                 <Text style={styles.itemName}>
-                    A book
+                    {name}
                 </Text>
-                <Text style={styles.itemDate}>22-07-2024</Text>
+                <Text style={styles.itemDate}>{getFormattedDate(dateData)}</Text> 
             </View>
             <View style={styles.buttonContainer}>
-                <PriceBox value='18' />
+                <PriceBox value={amount} />
             </View>
         </View>
         </Pressable>
@@ -41,6 +46,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#D0B8A8',
         borderRadius: 4,
         paddingHorizontal: 22,
+        marginBottom: 10
     },
     textContainer: {
         flexDirection: 'column',
