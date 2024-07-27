@@ -2,18 +2,24 @@
 import { createContext, useReducer } from "react";
 
 const TEST_EXPENSES = [
-    {
-        id: 'e1',
-        name: 'Nike Blazer',
-        amount: 105,
-        date: new Date('2024-06-01')
-    },
-    {
-        id: 'e2',
-        name: 'T-shirt',
-        amount: 20,
-        date: new Date('2024-07-01')
-    }
+    // {
+    //     id: 'e1',
+    //     name: 'Nike Blazer',
+    //     amount: 105,
+    //     date: new Date('2024-06-01')
+    // },
+    // {
+    //     id: 'e2',
+    //     name: 'T-shirt',
+    //     amount: 20,
+    //     date: new Date('2024-07-01')
+    // },
+    // {
+    //     id: 'e3',
+    //     name: 'Gymshark shorts',
+    //     amount: 15,
+    //     date: new Date('2024-07-25')
+    // }
 ];
 
 export const ExpenseContext = createContext({

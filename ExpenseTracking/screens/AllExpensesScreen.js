@@ -1,21 +1,15 @@
 import {View, StyleSheet} from 'react-native';
 import Colors from '../constants/colors';
-import TotalExpense from '../components/TotalExpense';
-import Expense from '../components/ExpenseInfo/Expense';
+import ExpensesOutput from '../components/ExpenseInfoOutput/ExpensesOutput';
 import { useNavigation } from '@react-navigation/native';
 import { useLayoutEffect } from 'react';
 import { useContext } from 'react';
 import { ExpenseContext } from '../context/ExpenseContext';
-import ExpensesOutput from '../components/ExpensesOutput';
+
 export default function AllExpensesScreen(){
     const navigation = useNavigation();
     const expensesContext = useContext(ExpenseContext);
-   console.log(expensesContext)
-    useLayoutEffect(() => {
-      navigation.setOptions({
-        title: 'All Expenses', 
-      });
-    }, [navigation]);
+   //console.log(expensesContext)
 
     return (
         <View style={styles.container}>

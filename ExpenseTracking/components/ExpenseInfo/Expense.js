@@ -9,7 +9,7 @@ import {getFormattedDate} from '../../utils/date';
 export default function Expense({id, name, amount, date}) {
     const navigation = useNavigation();
     const {setIsEditing} = useContext(EditContext)
-    console.log(date);
+    //console.log(date);
     const dateData = new Date(date);
 
     function handlePress(){

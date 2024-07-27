@@ -1,5 +1,5 @@
 import { Text, StyleSheet, View } from 'react-native';
-import Colors from '../constants/colors';
+import Colors from '../../constants/colors';
 
 export default function TotalExpense({title, totalAmount}) {
   return (

@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import TotalExpense from "./TotalExpense";
-import Expense from "./ExpenseInfo/Expense";
+import Expense from "../ExpenseInfo/Expense";
 import { FlatList } from "react-native";
 
 export default function ExpensesOutput({ title, expenses }) {
@@ -14,7 +14,10 @@ export default function ExpensesOutput({ title, expenses }) {
         return <Expense {...itemData.item} />
     }
 
-    let placeholder = <Text>No expenses added yet</Text>
+    let placeholder = title === 'Last 7 Days' ? 
+        <Text style={styles.placeholderText}>No expenses added in the last 7 days!</Text> : 
+        <Text style={styles.placeholderText}>No expenses added yet!</Text>;
+    
     return (
         <>
             <TotalExpense
@@ -28,8 +31,24 @@ export default function ExpensesOutput({ title, expenses }) {
                             renderItem={renderExpenseItem}
                             keyExtractor={item => item.id}
                         />
-                    : { placeholder }
+                    : 
+                    <View style={styles.placeholderContainer}>
+                         {placeholder}
+                    </View>
+                   
             }
         </>
     );
 }
+
+const styles = StyleSheet.create({
+    placeholderContainer:{
+        flexDirection: 'row',
+        justifyContent: 'center',
+        marginTop: 20
+    },
+    placeholderText: {
+        color: 'white',
+        fontFamily:'fira-sans-light',
+    }
+});
