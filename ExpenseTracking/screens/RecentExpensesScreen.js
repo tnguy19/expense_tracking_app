@@ -15,8 +15,6 @@ export default function RecentExpensesScreen() {
     return new Date(expense.date) >= sevenDaysAgoDate && currentDate >= new Date(expense.date);
   });
 
-  //console.log(recentExpenses);
-
   return (
     <View style={styles.container}>
      <ExpensesOutput title="Last 7 Days" expenses={recentExpenses} />

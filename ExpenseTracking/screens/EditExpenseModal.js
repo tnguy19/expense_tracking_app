@@ -4,6 +4,7 @@ import CustomButton from '../components/CustomButton';
 import { useContext, useLayoutEffect, useCallback} from 'react';
 import EditContext from '../context/EditContext';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import ExpenseForm from '../components/ManageExpense/ExpenseForm';
 
 export default function EditExpenseModal() {
     const navigation = useNavigation();
@@ -25,6 +26,7 @@ export default function EditExpenseModal() {
 
     return (
             <View style={styles.screenContainer}>
+                <ExpenseForm />
                 <View style={styles.buttonContainer}>
                     <CustomButton title='Cancel' />
                     <CustomButton title={isEditing ? 'Update' : 'Add'}/>
