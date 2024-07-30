@@ -1,30 +1,10 @@
 
 import { createContext, useReducer } from "react";
 
-const TEST_EXPENSES = [
-    // {
-    //     id: 'e1',
-    //     name: 'Nike Blazer',
-    //     amount: 105,
-    //     date: new Date('2024-06-01')
-    // },
-    // {
-    //     id: 'e2',
-    //     name: 'T-shirt',
-    //     amount: 20,
-    //     date: new Date('2024-07-01')
-    // },
-    // {
-    //     id: 'e3',
-    //     name: 'Gymshark shorts',
-    //     amount: 15,
-    //     date: new Date('2024-07-25')
-    // }
-];
-
 export const ExpenseContext = createContext({
     expenses: [],
     addExpense: ({name, amount, date}) => {},
+    setExpenses: (expenses) => {},
     deleteExpense: ({id}) => {},
     updateExpense: (id, {name, amount, date}) => {}
 });
@@ -32,8 +12,10 @@ export const ExpenseContext = createContext({
 function expensesReducer(state, action) {
     switch (action.type) {
         case 'ADD':
-            const id = new Date().toString() + Math.random().toString();
-            return [{...action.payload, id: id}, ...state];
+            return [{...action.payload}, ...state];
+        case 'SET':
+            const inverted = action.payload.reverse(); //invert to make sure the order is not modified by Firebase backend
+            return inverted;
         case 'UPDATE':
             const updateIndex = state.findIndex( expense => expense.id === action.payload.id);
             const updatedItem = {...state[updateIndex], ...action.payload.data};
@@ -48,10 +30,14 @@ function expensesReducer(state, action) {
 }
 
 export default function ExpensesContextProvider({children}){
-    const [expensesState, dispatch] = useReducer(expensesReducer, TEST_EXPENSES);
+    const [expensesState, dispatch] = useReducer(expensesReducer, []);
 
     function addExpense(expenseData){
         dispatch({type: 'ADD', payload: expenseData});
+    }
+
+    function setExpenses(expenses){
+        dispatch({type: 'SET', payload: expenses});
     }
 
     function deleteExpense(id){
@@ -64,6 +50,7 @@ export default function ExpensesContextProvider({children}){
 
     const value = {
         expenses: expensesState,
+        setExpenses: setExpenses,
         addExpense: addExpense,
         deleteExpense: deleteExpense,
         updateExpense: updateExpense
