@@ -1,5 +1,5 @@
 # expense_tracking_app
-Expense tracking app built with React Native, using Firebase for backend.
+Expense tracking app built in React Native with Expo, using Firebase for backend.
 
 ## Installation:
   1. Clone the repository
