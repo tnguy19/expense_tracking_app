@@ -1,7 +1,7 @@
 # expense_tracking_app
 Expense tracking app built in React Native with Expo, using Firebase for backend.
 
-## Installation:
+## How to run:
   1. Clone the repository
   2. Change directory to the React Native project folder: `cd ExpenseTracking`
   3. Run `npm i`
